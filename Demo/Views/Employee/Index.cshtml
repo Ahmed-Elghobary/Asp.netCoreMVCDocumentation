@@ -1,0 +1,41 @@
+﻿@model List<Employee>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+<a asp-action="New" asp-controller="Employee" class="btn btn-info">New</a>
+<div style="border:3px solid blue" id="EmployeeDetail"></div>
+<table class="table table-bordered table-hover">
+ 
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                <a href="#" onclick="GetData(@item.Id)"> 
+                    Name: @item.Name
+                </a>
+               
+             @*   <partial name="_CardPartial" model="item"></partial> *@
+            </td>
+            <td>
+                <a  asp-action="Edit" asp-controller="Employee" asp-route-idd="@item.Id" class="btn btn-info"> Edit</a>
+                <a  asp-action="Detail" asp-controller="Employee" asp-route-idd="@item.Id" class="btn btn-info"> Detail</a>
+            </td>
+        </tr>
+    }
+</table>
+@section Scripts{
+    <script>
+        function GetData(id){
+            console.log(id);
+            event.preventDefault();
+            $.ajax({
+                url: "/Employee/AjaxDetail/"+id,
+                success: function (result) {
+                    document.getElementById("EmployeeDetail").innerHTML = result;
+                }
+            });
+        }
+    </script>
+}

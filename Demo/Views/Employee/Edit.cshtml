@@ -1,0 +1,53 @@
+﻿@model Employee
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<form method="post" action="/Employee/SaveEdit">
+    <input  type="hidden" name="id" value="@Model.Id"/>
+    <div>
+        <label>Name</label>
+        <input type="text" name="Name" id="Name" value="@Model.Name" class="form form-control" />
+
+    </div>
+    <div>
+        <label>Address</label>
+        <input type="text" name="Address" id="Address" value="@Model.Address" class="form form-control" />
+        <span asp-validation-for="Address"></span>
+           
+    </div>
+    <div>
+        <label>Image</label>
+        <input type="text" name="Image" id="Image" value="@Model.Image" class="form form-control" />
+    </div>
+    <div>
+        <label>Salary</label>
+        <input type="number" name="Salary" id="Salary" value="@Model.Salary" class="form form-control" />
+    </div>
+    <div>
+        <label>Department</label>
+        
+        <select name="Dept_ID" id="Dept_ID">
+            @foreach (Department DeptItem in ViewBag.deptList)
+            {
+                if (Model.Dept_ID == DeptItem.Id)
+                {
+                    <option value="@DeptItem.Id" selected>@DeptItem.Name</option>
+
+                }
+                else
+                {
+                    <option value="@DeptItem.Id">@DeptItem.Name</option>
+                }
+              
+            }
+            
+        </select>
+    </div>
+    <input type="submit"  value="Edit" class="btn btn-success"/>
+</form>
+@section Scripts{
+    <partial name="_ValidationScriptsPartial"></partial>
+}
+
+

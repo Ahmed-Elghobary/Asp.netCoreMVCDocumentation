@@ -1,0 +1,53 @@
+﻿@model Employee
+@{
+    ViewData["Title"] = "New";
+    SelectList deptList = new SelectList(ViewBag.Deptlist,"Id","Name");
+}
+
+<form asp-action="SaveNew" asp-controller="Employee">
+    <div asp-validation-summary="All"></div>
+    <div>
+        <label asp-for="Name"></label>
+        <input class="form-control" asp-for="Name" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <div>
+        <label asp-for="Salary"></label>
+        <input class="form-control" asp-for="Salary" />
+        <span asp-validation-for="Salary" class="text-danger"></span>
+
+    </div>
+
+    <div>
+        <label asp-for="Image"></label>
+        <input class="form-control"  asp-for="Image"/>
+        <span asp-validation-for="Image" class="text-danger"></span>
+
+    </div>
+
+    <div>
+        <label asp-for="Address"></label>
+        <input class="form-control" asp-for="Address" />
+        <span asp-validation-for="Address" class="text-danger"></span>
+
+    </div>
+    <div>
+        <label asp-for="Dept_ID"></label>
+      
+        <select asp-for="Dept_ID" asp-items="deptList">
+           @*  @foreach (Department item in ViewBag.Deptlist)
+            {
+                <option value="@item.Id">@item.Name</option>
+            } *@
+        </select>
+        <span asp-validation-for="Dept_ID" class="text-danger"></span>
+
+    </div>
+    <input type="submit" value="Add Employee" class="btn btn-success" />
+</form>
+@section Scripts{
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}
+@* <script src="~/lib/jquery/dist/jquery.js"></script> *@
